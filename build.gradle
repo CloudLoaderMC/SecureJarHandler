@@ -1,3 +1,5 @@
+import ml.darubyminer360.gradleutils.GradleUtils
+
 buildscript {
     dependencies {
         classpath('de.jjohannes.gradle:extra-java-module-info:0.14')
@@ -6,7 +8,7 @@ buildscript {
 
 plugins {
     id 'com.github.ben-manes.versions' version '0.42.0'
-    id 'net.minecraftforge.gradleutils' version '2.+'
+    id 'ml.darubyminer360.gradleutils' version '2.2.0'
 }
 
 apply plugin: 'maven-publish'
@@ -16,7 +18,7 @@ allprojects {
     apply plugin: 'eclipse'
     apply plugin: 'de.jjohannes.extra-java-module-info'
 
-    group 'cpw.mods'
+    group 'ml.cloudmc'
     java {
         toolchain.languageVersion = JavaLanguageVersion.of(16)
         modularity.inferModulePath.set(true)
@@ -25,6 +27,10 @@ allprojects {
 
     repositories {
         mavenLocal()
+        maven {
+            name = 'Cloud'
+            url = 'https://maven.cloudmc.ml/releases/'
+        }
         maven {
             name = 'forge'
             url = 'https://maven.minecraftforge.net/'
@@ -110,7 +116,7 @@ compileTestJava {
     ]
 }
 
-group = 'cpw.mods'
+group = 'ml.cloudmc'
 
 version = gradleutils.getTagOffsetVersion()
 logger.lifecycle('Version: ' + version)
@@ -178,27 +184,27 @@ publishing {
             pom {
                 name = 'Secure Modular Jar handler'
                 description = 'Making the Java modular system provide security information'
-                url = 'https://github.com/McModLauncher/securejarhandler'
+                url = 'https://github.com/CloudLoaderMC/SecureJarHandler'
                 scm {
-                    url = 'https://github.com/McModLauncher/securejarhandler'
-                    connection = 'scm:git:git://github.com/McModLauncher/securejarhandler.git'
-                    developerConnection = 'scm:git:git@github.com:McModLauncher/securejarhandler.git'
+                    url = 'https://github.com/CloudLoaderMC/SecureJarHandler'
+                    connection = 'scm:git:git://github.com/CloudLoaderMC/SecureJarHandler.git'
+                    developerConnection = 'scm:git:git@github.com:CloudLoaderMC/SecureJarHandler.git'
                 }
                 issueManagement {
                     system = 'github'
-                    url = 'https://github.com/McModLauncher/securejarhandler/issues'
+                    url = 'https://github.com/CloudLoaderMC/SecureJarHandler/issues'
                 }
 
                 developers {
                     developer {
-                        id = 'cpw'
-                        name = 'cpw'
+                        id = 'DaRubyMiner360'
+                        name = 'DaRubyMiner360'
                     }
                 }
             }
         }
     }
     repositories {
-        maven gradleutils.getPublishingForgeMaven()
+        maven GradleUtils.getPublishingCloudMaven(project)
     }
 }

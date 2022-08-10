@@ -26,7 +26,7 @@ public class ModuleClassLoader extends ClassLoader {
     private final Configuration configuration;
     private final Map<String, JarModuleFinder.JarModuleReference> resolvedRoots;
     private final Map<String, ResolvedModule> packageLookup;
-    private final Map<String, ClassLoader> parentLoaders;
+    public final Map<String, ClassLoader> parentLoaders;
     private ClassLoader fallbackClassLoader = ClassLoader.getPlatformClassLoader();
 
     public ModuleClassLoader(final String name, final Configuration configuration, final List<ModuleLayer> parentLayers) {
